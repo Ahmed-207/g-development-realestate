@@ -1,0 +1,37 @@
+<section class="relative">
+    <main id="main-content" class="container w-[95%] mx-auto">
+        <header role="banner" aria-label="Hero"
+            class="min-h-screen bg-center bg-cover bg-fixed flex items-center justify-center">
+            <h1 [appAnimateOnScroll]="'animate__fadeInUp'"
+                class="text-4xl font-medium md:text-8xl text-white md:font-semibold">The G Development
+            </h1>
+        </header>
+        <section aria-labelledby="projects-heading" class="proj-overview-container my-3">
+            <h2 id="projects-heading" [appAnimateOnScroll]="'animate__fadeInUp'"
+                class="text-3xl font-normal md:text-6xl md:font-medium text-center mb-5">Our Projects
+            </h2>
+            <ul class="grid gap-6">
+                @for(project of mainProjectsForHome(); track $index){
+                <li>
+                    <app-project-overview [projectSlugForBtn]="project.projectSlug" [imageUrl]="project.projectMainImg"
+                        [projectName]="project.projectName"
+                        [projectNotation]="project.projectBrief"></app-project-overview>
+                </li>
+                }
+            </ul>
+        </section>
+    </main>
+    @if(isContactModalOpen){
+    <div class="contact-modal-container flex items-center justify-center fixed inset-0 z-50 animate__animated px-10 py-15 md:p-0"
+        animate.enter="animate__fadeIn" animate.leave="animate__fadeOut">
+        <app-contact-form (modalFlagForHome)="closeModalAfterSuccessReg($event)"
+            (toastFlag)="showMessage($event)"></app-contact-form>
+        <div class="close-modal p-10 absolute right-0 top-0">
+            <button (click)="closeModal()"
+                class="bg-gray-900 border-2 -translate-y-10 md:translate-y-0 border-gray-400 size-10 rounded-2xl flex items-center justify-center hover:bg-gray-400 duration-200 transition-colors"><i
+                    class="pi pi-times text-gray-200"></i></button>
+        </div>
+    </div>
+    }
+</section>
+<p-toast position="top-right" key="tr" [breakpoints]="{ '920px': { width: '50%', right: 'auto' } }" />

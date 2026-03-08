@@ -1,0 +1,127 @@
+
+/* navbar.component.css
+   All classes here extend or override Tailwind utilities.
+   Tailwind handles the bulk of styling; this file handles
+   things Tailwind can't express cleanly (keyframe animations,
+   complex pseudo-selectors, conditional state transitions). */
+
+/* ─── Host element ──────────────────────────────────────────────────────── */
+:host {
+  display: block;
+}
+
+/* ─── Navbar base ───────────────────────────────────────────────────────── */
+.navbar-wrapper {
+  background-color: theme('colors.gray.950');
+  /* Smooth slide-up / slide-down via translateY */
+  transform: translateY(0);
+  transition:
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+/* Navbar hidden: slides out of view upward */
+.navbar--hidden {
+  transform: translateY(-110%);
+}
+
+/* Navbar scrolled: add a soft shadow + slight blur backdrop */
+.navbar--scrolled {
+  box-shadow: 0 4px 32px -4px rgba(0, 0, 0, 0.6);
+  background-color: rgba(3, 7, 18, 0.92); /* gray-950 / 92 % */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ─── Dropdown panel ────────────────────────────────────────────────────── */
+.dropdown-panel {
+  pointer-events: none;
+}
+
+.dropdown-panel--open {
+  opacity: 1;
+  transform: scaleY(1) translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-panel--closed {
+  opacity: 0;
+  transform: scaleY(0.92) translateY(-6px);
+  pointer-events: none;
+}
+
+/* Stagger each dropdown item on open */
+.dropdown-panel--open .dropdown-item {
+  animation: itemFadeIn 0.18s ease both;
+}
+
+.dropdown-panel--open .dropdown-item:nth-child(1) { animation-delay: 0.03s; }
+.dropdown-panel--open .dropdown-item:nth-child(2) { animation-delay: 0.07s; }
+.dropdown-panel--open .dropdown-item:nth-child(3) { animation-delay: 0.11s; }
+.dropdown-panel--open .dropdown-item:nth-child(4) { animation-delay: 0.15s; }
+
+@keyframes itemFadeIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ─── Mobile menu ───────────────────────────────────────────────────────── */
+.mobile-menu--open {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.mobile-menu--closed {
+  max-height: 0;
+  opacity: 0;
+}
+
+/* ─── Hamburger → X animation ───────────────────────────────────────────── */
+.hamburger-line {
+  transform-origin: center;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+.hamburger-line--top-open {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-line--bot-open {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ─── CTA button shine sweep on hover ──────────────────────────────────── */
+.cta-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.45s ease;
+}
+
+.cta-btn:hover::after {
+  transform: translateX(100%);
+}
+
+/* ─── Logo badge pulse on hover ─────────────────────────────────────────── */
+.logo-mark:hover .logo-badge {
+  animation: logoPulse 0.4s ease;
+}
+
+@keyframes logoPulse {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}

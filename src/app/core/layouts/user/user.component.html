@@ -1,0 +1,14 @@
+<div class="user-app-container">
+  <app-navbar></app-navbar>
+  <main class="main-content-container mt-16">
+    <router-outlet></router-outlet>
+  </main>
+  <div class="fixed bottom-0 right-0 p-15 z-9999" [class]="{
+    'animate__animated' : contactBtnStopped(),
+     'animate__heartBeat' : contactBtnStopped(),
+      'animate__infinite' : contactBtnStopped()
+  }">
+    <p-button icon="pi pi-phone" styleClass="contact-btn-main" routerLink="/contact-us" />
+  </div>
+  <app-footer></app-footer>
+</div>

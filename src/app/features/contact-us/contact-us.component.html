@@ -1,0 +1,38 @@
+<section class="my-6">
+    <main class="container w-[95%] mx-auto grid grid-cols-12 gap-3">
+        <div class="col-span-12 md:col-span-8">
+            <app-contact-form (toastFlag)="showMessage($event)"></app-contact-form>
+        </div>
+        <div class="contact-container col-span-12 md:col-span-4 p-4 bg-gray-400 rounded-2xl self-start">
+            <div class="contact-inner-container rounded-2xl bg-gray-900 shadow-2xl p-4">
+                <h2 class="text-md md:text-lg text-gray-200 text-shadow-xs text-shadow-gray-200 my-2 font-light">G
+                    Development</h2>
+                <ul>
+                    <li class="my-2">
+                        <a [href]="'tel:' + contact().phone"
+                            class="contact-item group flex items-start gap-4 font-light" aria-label="Call us">
+                            <div class="flex flex-col">
+                                <span
+                                    class="contact-value text-gray-400 group-hover:text-gray-200 transition-colors duration-200">
+                                    {{ contact().phone }}
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="my-2">
+                        <a [href]="'mailto:' + contact().email"
+                            class="contact-item group flex items-start gap-4 font-light" aria-label="Email us">
+                            <div class="flex flex-col">
+                                <span
+                                    class="contact-value text-gray-400 group-hover:text-gray-200 transition-colors duration-200">
+                                    {{ contact().email }}
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</section>
+<p-toast position="top-right" key="tr" [breakpoints]="{ '920px': { width: '50%', right: 'auto' } }" />

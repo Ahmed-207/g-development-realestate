@@ -1,0 +1,9 @@
+<div #myCard
+    class="cursor-pointer project-card rounded-2xl size-full p-5 flex flex-col bg-center justify-between bg-cover overflow-hidden group/parent"
+    [style.background-image]="'linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url(' + projectImage() + ')'"
+    [routerLink]="['/project-details', projectSlug()]">
+    <h3 class="text-3xl md:text-4xl text-gray-50 w-full text-start">{{projectName()}}</h3>
+    <span
+        class="text-xl font-light md:text-2xl text-gray-50 text-center opacity-0 group-hover/parent:opacity-100 translate-y-7 group-hover/parent:translate-y-0 duration-500 transition-all">visit
+        project</span>
+</div>

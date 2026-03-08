@@ -1,0 +1,67 @@
+<section class="error-wrapper min-h-[50vh] bg-gray-50 flex items-center justify-center p-6">
+
+    <!-- ── Card Container ── -->
+    <div class="error-card max-w-md w-full bg-white rounded-2xl shadow-lg p-10 text-center border border-gray-200">
+
+        <!-- ── Illustration ── -->
+        <div class="icon-wrapper relative inline-flex items-center justify-center mb-6">
+            <!-- House SVG (inline — no external deps needed) -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+                class="house-svg w-20 h-20 text-gray-900" aria-hidden="true">
+                <path d="M8 28L32 8l24 20" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <rect x="14" y="28" width="36" height="28" rx="2" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <rect x="26" y="40" width="12" height="16" rx="1" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" />
+                <!-- Broken window — signals "something went wrong" -->
+                <line x1="18" y1="36" x2="24" y2="42" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <line x1="24" y1="36" x2="18" y2="42" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+
+            <!-- Floating error badge -->
+            <span class="error-badge absolute -top-2 -right-2
+         bg-gray-900 text-gray-50
+         text-xs font-bold
+         rounded-full px-2 py-0.5
+         select-none" aria-label="Error code 404">404</span>
+        </div>
+
+        <!-- ── Heading ── -->
+        <h1 class="error-title text-2xl font-bold text-gray-900 mb-3 leading-snug">
+            Looks like this property is off the market!
+        </h1>
+
+        <!-- ── Friendly message ── -->
+        <p class="error-message text-sm text-gray-500 leading-relaxed mb-6">
+            The page you're looking for has been sold, moved, or never existed.
+            Don't worry — great homes are still waiting for you.
+        </p>
+
+        <!-- ── Divider ── -->
+        <hr class="error-divider border-gray-200 mb-6" />
+
+        <!-- ── CTA Button (routerLink navigates to /home) ── -->
+        <a routerLink="/home" class="home-btn inline-flex items-center gap-2
+         bg-gray-900 text-gray-50
+         px-6 py-3 rounded-xl
+         text-sm font-semibold
+         no-underline
+         transition-all duration-200
+         hover:bg-gray-950 hover:-translate-y-0.5
+         focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+            aria-label="Go back to the home page">
+            <!-- Arrow icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="btn-icon w-4 h-4 rotate-180" viewBox="0 0 20 20"
+                fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0L4 10.414l-1.293 1.293a1 1 0 
+             01-1.414-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 
+             1.414L13 10.414l-3.293 3.293z" clip-rule="evenodd" />
+            </svg>
+            Back to Home
+        </a>
+
+    </div>
+    <!-- ── /Card Container ── -->
+
+</section>

@@ -1,0 +1,39 @@
+:host ::ng-deep .p-floatlabel-on:has(input:focus) {
+    --p-inputtext-focus-background: #1a1a1a;
+    --p-inputtext-focus-border-color: #101828;
+}
+
+
+:host ::ng-deep .p-floatlabel-on input:focus~label {
+    color: #101828 !important;
+}
+
+
+:host ::ng-deep .p-inputtext {
+    transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+
+:host ::ng-deep .p-floatlabel-on:has(input:focus),
+:host ::ng-deep .p-floatlabel-on:has(.p-select-focus),
+:host ::ng-deep .p-floatlabel-on:has(.p-datepicker-input:focus) {
+    --p-inputtext-focus-background: #1a1a1a;
+    --p-inputtext-focus-border-color: #101828;
+    --p-select-focus-background: #1a1a1a;
+    --p-select-focus-border-color: #101828;
+}
+
+:host ::ng-deep .p-floatlabel-on:has(.p-select-focus) label,
+:host ::ng-deep .p-floatlabel-on:has(.p-datepicker-input:focus) label,
+:host ::ng-deep .p-floatlabel-on input:focus~label {
+    color: #101828 !important;
+}
+
+:host ::ng-deep .p-select,
+:host ::ng-deep .p-datepicker {
+    width: 100%;
+}
+
+:host ::ng-deep .p-inputtext {
+    transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}

@@ -1,0 +1,114 @@
+<nav class="navbar-wrapper fixed top-0 left-0 w-full z-50 transition-all duration-500" [class.navbar--hidden]="isHidden"
+    [class.navbar--scrolled]="isScrolled">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+
+        <!-- ─── Logo ─────────────────────────────────────────────── -->
+        <a routerLink="/home" class="logo-mark flex items-center gap-3 group">
+            <span class="logo-badge w-9 h-9 rounded-lg bg-gray-400 flex items-center justify-center
+               font-bold text-gray-950 text-lg tracking-tighter
+               group-hover:bg-gray-600 transition-colors duration-300">G</span>
+            <span class="logo-name text-gray-400 text-sm font-semibold tracking-widest uppercase
+                   group-hover:text-gray-200 transition-colors duration-300">
+                Developments
+            </span>
+        </a>
+
+        <!-- ─── Desktop Links ─────────────────────────────────────── -->
+        <ul class="hidden md:w-[70%] md:flex justify-between items-center gap-1">
+
+            <div class="flex items-center justify-between">
+                <!-- Link 1: About Us -->
+                <li class="me-1.5">
+                    <a routerLink="/about" routerLinkActive="bg-gray-900 text-gray-200" class="nav-link px-4 py-2 rounded-md text-gray-400 text-sm font-medium tracking-wide
+                 hover:text-gray-100 hover:bg-gray-800 transition-all duration-200">
+                        About Us
+                    </a>
+                </li>
+
+                <!-- ── Projects Dropdown ───────────────────────────────────────── -->
+                <li class="relative" #dropdownHost>
+                    <button (click)="toggleDropdown()" class="cursor-pointer nav-link flex items-center gap-1.5 px-4 py-2 rounded-md
+                 text-gray-400 text-sm font-medium tracking-wide
+                 hover:text-gray-100 hover:bg-gray-800 transition-all duration-200"
+                        [attr.aria-expanded]="dropdownOpen">
+                        Projects
+                        <!-- chevron icon -->
+                        <svg class="w-3.5 h-3.5 transition-transform duration-300" [class.rotate-180]="dropdownOpen"
+                            fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown Panel -->
+                    <div class="dropdown-panel absolute right-0 mt-2 w-52 rounded-xl bg-gray-900
+                 border border-gray-800 shadow-2xl overflow-hidden
+                 origin-top transition-all duration-200" [class.dropdown-panel--open]="dropdownOpen"
+                        [class.dropdown-panel--closed]="!dropdownOpen">
+                        <!-- ✏️  Add / remove items below to customise the dropdown -->
+                        @for(item of dropdownItems(); track $index){
+                        <a [routerLink]="['project-details',item.route]" (click)="closeDropdown()" class="dropdown-item cursor-pointer flex items-center gap-3 px-4 py-3 text-sm text-gray-400
+                   hover:text-gray-100 hover:bg-gray-800 transition-colors duration-150">
+                            {{ item.label }}
+                        </a>
+                        }
+                    </div>
+                </li>
+            </div>
+
+            <!-- Link 3: Contact Us -->
+            <li>
+                <a routerLink="/contact-us" routerLinkActive="bg-gray-900 text-gray-200" class="nav-link px-4 py-2 cursor-pointer rounded-md text-gray-400 text-sm font-medium tracking-wide
+                 hover:text-gray-100 hover:bg-gray-800 transition-all duration-200">
+                    Contact Us
+                </a>
+            </li>
+
+        </ul>
+
+        <!-- ─── Mobile Hamburger ──────────────────────────────────── -->
+        <button class="md:hidden flex flex-col gap-1.5 p-2 group" (click)="toggleMobileMenu()" aria-label="Toggle menu">
+            <span class="hamburger-line block w-5 h-0.5 bg-gray-400 rounded-full
+               transition-all duration-300 group-hover:bg-gray-200"
+                [class.hamburger-line--top-open]="mobileMenuOpen"></span>
+            <span class="hamburger-line block w-5 h-0.5 bg-gray-400 rounded-full
+               transition-all duration-300 group-hover:bg-gray-200" [class.opacity-0]="mobileMenuOpen"></span>
+            <span class="hamburger-line block w-5 h-0.5 bg-gray-400 rounded-full
+               transition-all duration-300 group-hover:bg-gray-200"
+                [class.hamburger-line--bot-open]="mobileMenuOpen"></span>
+        </button>
+
+    </div>
+
+    <!-- ─── Mobile Menu ───────────────────────────────────────────── -->
+    <div class="mobile-menu md:hidden overflow-hidden transition-all duration-300"
+        [class.mobile-menu--open]="mobileMenuOpen" [class.mobile-menu--closed]="!mobileMenuOpen">
+        <div class="px-6 pb-6 flex flex-col gap-1 border-t border-gray-800 pt-4">
+
+            <!-- Mobile About Us -->
+            <a routerLink="/about" (click)="closeMobileMenu()" class="mobile-link px-3 py-2.5 rounded-lg text-gray-400 text-sm font-medium
+                hover:text-gray-100 hover:bg-gray-800 transition-colors duration-150">
+                About Us
+            </a>
+
+            <!-- Mobile Projects dropdown items (flat list) -->
+            <p class="px-3 pt-2 pb-1 text-xs text-gray-600 font-semibold uppercase tracking-widest">
+                Projects
+            </p>
+            @for(item of dropdownItems(); track $index){
+            <a [routerLink]="['project-details',item.route]" (click)="closeMobileMenu()" class="mobile-link flex items-center gap-3 px-3 py-2.5 rounded-lg
+               text-gray-400 text-sm font-medium
+               hover:text-gray-100 hover:bg-gray-800 transition-colors duration-150">
+                {{ item.label }}
+            </a>
+            }
+
+            <!-- Mobile Contact Us -->
+            <a routerLink="/contact-us" (click)="closeMobileMenu()" class="mobile-link px-3 py-2.5 rounded-lg text-gray-400 text-sm font-medium
+                hover:text-gray-100 hover:bg-gray-800 transition-colors duration-150">
+                Contact Us
+            </a>
+
+        </div>
+    </div>
+
+</nav>

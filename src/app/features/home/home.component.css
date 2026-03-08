@@ -1,0 +1,7 @@
+header{
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('/assets/images/home-bg.jpg');
+}
+:host ::ng-deep .contact-modal-container{
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)) ;
+    --animate-duration: 0.3s;
+}

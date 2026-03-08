@@ -1,0 +1,27 @@
+<div #projectSpecific class="project-overview min-h-[66vh] relative group/parent overflow-hidden">
+    <div [appAnimateOnScroll]="'animate__fadeIn'"
+        class="bg-container absolute inset-0 bg-line group-hover/parent:scale-125 transition-all duration-500"
+        [style.background-image]="backgroundStyle()">
+        <div
+            class="transp-layer absolute inset-0 bg-gray-950/35 opacity-0 group-hover/parent:opacity-100 transition-all duration-500">
+
+        </div>
+    </div>
+    <div [appAnimateOnScroll]="'animate__fadeInUp'" [animateDelay]="'1s'"
+        class="absolute inset-0 p-5 flex flex-col items-start justify-center md:flex-row md:items-center md:justify-between">
+        <div class="content">
+            <h3
+                class="text-2xl md:text-5xl md:group-hover/parent:text-4xl transition-all duration-500  text-white mb-4">
+                {{projectName()}}</h3>
+            <p
+                class="text-lg md:text-xl md:opacity-0 md:group-hover/parent:opacity-85 transition-all duration-500 text-gray-200 mb-4">
+                {{projectNotation()}}</p>
+        </div>
+        <div>
+            <button
+                class="project-link btn-main md:opacity-0 md:-translate-x-8 md:group-hover/parent:opacity-100 md:group-hover/parent:translate-x-0 transition-all delay-100 duration-700" (click)="navigateToProject(projectSlugForBtn())">Project
+                Details</button>
+        </div>
+
+    </div>
+</div>

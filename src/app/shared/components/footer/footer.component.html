@@ -1,0 +1,145 @@
+<!-- footer.component.html -->
+<footer class="footer-wrapper w-full bg-gray-600">
+
+    <!-- ─── Main Grid ──────────────────────────────────────────────────────── -->
+    <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+
+        <!-- ══ Column 1 : About Us ════════════════════════════════════════════ -->
+        <div class="about-col flex flex-col gap-5" [appAnimateOnScroll]="'animate__fadeInLeft'">
+
+            <!-- Logo mark (mirrors the navbar) -->
+            <div class="flex items-center gap-3">
+                <span class="logo-badge w-9 h-9 rounded-lg bg-gray-400 flex items-center justify-center
+                 font-bold text-gray-950 text-lg tracking-tighter">G</span>
+                <span class="text-gray-400 text-sm font-semibold tracking-widest uppercase">
+                    Developments
+                </span>
+            </div>
+
+            <!-- Section heading -->
+            <h2 class="section-heading text-gray-100 text-xl font-semibold tracking-tight">
+                About Us
+            </h2>
+
+            <!-- ✏️  Edit this paragraph whenever you're ready -->
+            <p class="about-body text-gray-400 text-sm leading-relaxed max-w-sm">
+                G Developments proudly presents a diverse portfolio of exceptional projects across Egypt's most
+                sought-after locations. From the luxurious lifestyle of New Giza and the vibrant urban hub of IVY in
+                West Cairo, to the pristine beaches of Hacienda Red, Playa Ghazala, Seashell, Playa Ras El Hekma, and
+                Seashell Ras El Hekma in Sahel, we offer unparalleled living experiences. In East Cairo, discover the
+                thriving community of New Cairo.
+                <!-- ✏️  Replace the text above with your own copy. -->
+            </p>
+
+            <!-- Thin accent rule -->
+            <span class="accent-rule block w-10 h-0.5 rounded-full bg-gray-600"></span>
+
+        </div>
+
+        <!-- ══ Column 2 : Contact Us ══════════════════════════════════════════ -->
+        <div class="contact-col flex flex-col gap-5" [appAnimateOnScroll]="'animate__fadeInRight'">
+
+            <h2 class="section-heading text-gray-100 text-xl font-semibold tracking-tight">
+                Contact Us
+            </h2>
+
+            <ul class="contact-list flex flex-col gap-4">
+
+                <!-- Phone -->
+                <li>
+                    <a [href]="'tel:' + contact().phone" class="contact-item group flex items-start gap-4"
+                        aria-label="Call us">
+                        <span class="contact-icon-wrap">
+                            <!-- phone svg -->
+                            <svg class="contact-icon text-gray-400" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                                aria-hidden="true">
+                                <path d="M22 16.92v3a2 2 0 01-2.18 2
+                         19.8 19.8 0 01-8.63-3.07
+                         A19.5 19.5 0 013.09 12.48
+                         19.8 19.8 0 01.06 3.82
+                         2 2 0 012.04-2h3a2 2 0 012 1.72
+                         c.13.96.36 1.9.68 2.81a2 2 0 01-.45 2.11L6.09 9.91
+                         a16 16 0 006 6l1.27-1.27
+                         a2 2 0 012.11-.45c.91.32 1.85.55 2.81.68
+                         A2 2 0 0122 16.92z" />
+                            </svg>
+                        </span>
+                        <div class="flex flex-col">
+                            <span class="contact-label text-gray-400">Phone</span>
+                            <span
+                                class="contact-value text-gray-400 group-hover:text-gray-200 transition-colors duration-200">
+                                {{ contact().phone }}
+                            </span>
+                        </div>
+                    </a>
+                </li>
+
+                <!-- Email -->
+                <li>
+                    <a [href]="'mailto:' + contact().email" class="contact-item group flex items-start gap-4"
+                        aria-label="Email us">
+                        <span class="contact-icon-wrap">
+                            <!-- mail svg -->
+                            <svg class="contact-icon text-gray-400" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                                aria-hidden="true">
+                                <rect x="2" y="4" width="20" height="16" rx="2" />
+                                <path d="M2 7l10 7 10-7" />
+                            </svg>
+                        </span>
+                        <div class="flex flex-col">
+                            <span class="contact-label text-gray-400">Email</span>
+                            <span
+                                class="contact-value text-gray-400 group-hover:text-gray-200 transition-colors duration-200">
+                                {{ contact().email }}
+                            </span>
+                        </div>
+                    </a>
+                </li>
+
+                <!-- Contact Page Link -->
+                <li>
+                    <a routerLink="/contact-us" class="contact-item group flex items-start gap-4"
+                        aria-label="Go to contact page">
+                        <span class="contact-icon-wrap">
+                            <!-- map-pin svg -->
+                            <svg class="contact-icon text-gray-400" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                                aria-hidden="true">
+                                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                        </span>
+                        <div class="flex flex-col">
+                            <span class="contact-label text-gray-400">Visit Us</span>
+                            <span
+                                class="contact-value contact-page-link text-gray-400 group-hover:text-gray-200 transition-colors duration-200">
+                                Contact Page
+                                <svg class="inline-block w-3 h-3 ml-1 -mt-0.5 arrow-icon
+                            transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- ─── Bottom Bar ─────────────────────────────────────────────────────── -->
+    <div class="bottom-bar border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 py-5
+             flex flex-col sm:flex-row items-center justify-center">
+            <p class="text-xs text-gray-600 tracking-wide">
+                &copy; {{ currentYear }} G Developments. All rights reserved.
+            </p>
+        </div>
+    </div>
+
+</footer>

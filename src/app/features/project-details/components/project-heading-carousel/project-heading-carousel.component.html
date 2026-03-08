@@ -1,0 +1,16 @@
+<swiper-container #mySwiper class="w-full block overflow-hidden" init="false">
+    @for( projectSlide of projectDataForSlide(); track $index ){
+    <swiper-slide class="rounded-xl h-[80vh] relative overflow-hidden flex items-center justify-center">
+        <div
+            class="slide-bg absolute inset-0 bg-center bg-cover" [style.background-image]="`url(${projectSlide.slideImg})`">
+        </div>
+        <div class="absolute inset-0 bg-black/30"></div>
+        @if(projectSlide.slideTag){
+        <div class="relative z-10">
+            <h1 class="text-4xl md:text-8xl text-white font-bold uppercase tracking-tighter text-center"
+                data-swiper-parallax-x="-2000" data-swiper-parallax-opacity="0" data-swiper-parallax-duration="3000">{{projectSlide.slideTag}}</h1>
+        </div>
+        }
+    </swiper-slide>
+    }
+</swiper-container>

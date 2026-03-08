@@ -1,0 +1,42 @@
+<section>
+    <main class="container w-[95%] mx-auto">
+        <header class="carousel-container mb-4">
+            <app-project-heading-carousel
+                [projectDataForSlide]="projectDataForCarousel()"></app-project-heading-carousel>
+        </header>
+        <section class="project-desc p-3 my-4">
+            <h2 [appAnimateOnScroll]="'animate__fadeInDown'" [animateDuration]="3"
+                class="text-2xl font-light md:text-5xl text-gray-600 text-shadow-md mb-3">
+                {{projectDataForDetails().projectSlogan}}
+            </h2>
+            <p [appAnimateOnScroll]="'animate__fadeInUp'" [animateDuration]="3"
+                class="text-sm md:text-lg text-gray-950">{{projectDataForDetails().projectDesc}}</p>
+            <ul [appAnimateOnScroll]="'animate__fadeInUp'" [animateDuration]="3" class="my-4">
+                <h3 class=" mb-2 text-sm md:text-lg text-gray-950 font-normal">Units type </h3>
+                @for(unitType of projectDataForDetails().unitsType; track $index){
+                <li class="text-sm md:text-lg text-gray-950 font-light mb-1"><i
+                        class="pi pi-building ms-4 me-2 text-sm md:text-lg text-gray-950 font-extralight"></i>{{unitType}}
+                </li>
+                }
+            </ul>
+        </section>
+        <section class="project-facilities my-4 relative">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 h-full">
+                @for(facility of projectDataForDetails().projectFacilities; track $index){
+                <div class="facility-container max-h-full p-2"
+                    [appAnimateOnScroll]="$even ? 'animate__fadeInLeft' : 'animate__fadeInRight'" [animateDuration]="3">
+                    <img [src]="facility.facilityImg" class="w-full block mx-auto rounded-2xl"
+                        [alt]="facility.facilityName">
+                    <div class="facility-name-container absolute inset-0 flex items-end justify-start">
+                        <h3 class="m-7 text-2xl md:text-5xl text-gray-200 text-shadow-2xs font-normal">
+                            {{facility.facilityName}}</h3>
+                    </div>
+                </div>
+                }
+            </div>
+        </section>
+        <section class="contact-access" [appAnimateOnScroll]="'animate__fadeInRight'">
+            <app-contact-access-card></app-contact-access-card>
+        </section>
+    </main>
+</section>

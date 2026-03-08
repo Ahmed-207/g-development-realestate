@@ -1,0 +1,38 @@
+<section class="mt-5">
+    <main id="main-content" class="container w-[95%] mx-auto">
+        <h2 class="text-3xl md:text-5xl text-gray-900 mb-5">About G Development</h2>
+        <div class="content-container bg-gray-50 rounded-t-2xl overflow-hidden">
+            <div class="image-container">
+                <img src="/assets/images/buying-real-estate-concept.jpg"
+                    class="about-main-image block w-full relative h-[60vh] object-cover" alt="">
+            </div>
+            <div class="caption-container px-3 py-5">
+                <p [appAnimateOnScroll]="'animate__fadeInUp'" class="md:text-xl font-light text-gray-900 my-3">
+                    G Developments proudly presents a diverse portfolio of exceptional projects across Egypt's most
+                    sought-after locations. From the luxurious lifestyle of New Giza and the vibrant urban hub of IVY in
+                    West Cairo, to the pristine beaches of Hacienda Red, Playa Ghazala, Seashell, Playa Ras El Hekma,
+                    and Seashell Ras El Hekma in Sahel, we offer unparalleled living experiences. In East Cairo,
+                    discover the thriving community of New Cairo, and escape to the serene retreats of Ein Bay and Ein
+                    Resort in Sokhna. G Developments is committed to creating distinctive and enriching environments
+                    that cater to every lifestyle.</p>
+                <ul [appAnimateOnScroll]="'animate__fadeInUp'" class="md:text-xl font-light text-gray-900 my-10">
+                    <h3 class="my-3 font-normal md:text-2xl">Why Choose G-Development</h3>
+                    <li class="mb-2"><i class="pi pi-building-columns mx-2"></i> Over a decade of excellence under the New Giza legacy</li>
+                    <li class="mb-2"><i class="pi pi-building-columns mx-2"></i>  Prime locations: Cairo, New Zayed, and the North Coast</li>
+                    <li class="mb-2"><i class="pi pi-building-columns mx-2"></i>  Direct sales model: no brokers, flexible payment plans</li>
+                    <li class="mb-2"><i class="pi pi-building-columns mx-2"></i>  Strong ROI for investors and second-home buyers</li>
+                </ul>
+            </div>
+            <div class="project-cards-container grid grid-cols-12 gap-3 p-3 w-full">
+                @for(project of projectsForAbout(); track $index){
+                <div [appAnimateOnScroll]=" $even ? 'animate__fadeInLeft' : 'animate__fadeInRight'"
+                    [animateDuration]="4" class="col-span-12 md:col-span-6 min-h-[50vh]"
+                    [animateDelay]="$index*0.5+'s'">
+                    <app-project-card [projectImage]="project.projectMainImg" [projectName]="project.projectName"
+                        [projectSlug]="project.projectSlug"></app-project-card>
+                </div>
+                }
+            </div>
+        </div>
+    </main>
+</section>

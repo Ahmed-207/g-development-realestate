@@ -1,0 +1,85 @@
+
+/* ─── Section headings ────── */
+.section-heading {
+    position: relative;
+    padding-left: 0.875rem;
+}
+
+.section-heading::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 70%;
+    border-radius: 9999px;
+    background-color: theme('colors.gray.400');
+}
+
+/* ─── About body text ───────── */
+.about-body {
+    line-height: 1.75;
+}
+
+/* ─── Contact list items ─────────*/
+.contact-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: theme('colors.gray.600');
+    line-height: 1.2;
+    margin-bottom: 0.15rem;
+}
+
+.contact-value {
+    font-size: 0.875rem;
+    color: theme('colors.gray.400');
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* ─── Contact icon wrapper ───────────── */
+.contact-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.5rem;
+    background-color: theme('colors.gray.900');
+    border: 1px solid theme('colors.gray.800');
+    color: theme('colors.gray.400');
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.contact-item.group:hover .contact-icon-wrap {
+    background-color: theme('colors.gray.800');
+    border-color: theme('colors.gray.600');
+    color: theme('colors.gray.200');
+}
+
+.contact-icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* ─── Contact page link arrow nudge ───────────────*/
+.contact-page-link {
+    text-decoration: underline;
+    text-decoration-color: theme('colors.gray.700');
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease;
+}
+
+.contact-item.group:hover .contact-page-link {
+    text-decoration-color: theme('colors.gray.400');
+}
+
+/* ─── Bottom bar ──────────────*/
+.bottom-bar {
+    background-color: rgba(3, 7, 18, 0.6);
+    /* gray-950 at 60% — slightly distinct */
+}

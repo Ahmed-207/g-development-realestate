@@ -1,0 +1,54 @@
+<div class="form-container p-4 bg-gray-400 rounded-2xl">
+    <div class="form-input-container rounded-2xl bg-gray-900 shadow-2xl p-4">
+        <div class="caption">
+            <h2 class="text-xl md:text-3xl text-gray-200 text-shadow-xs text-shadow-gray-200 my-2 font-light">
+                Interested In The G Developments Community ?</h2>
+            <p class="text-gray-200 mb-3 font-light">leave your contact info and we'll get in touch to answer
+                all of your
+                enquiries
+            </p>
+        </div>
+        <form (ngSubmit)="onSubmitForm()" [formGroup]="leadFormData()"
+            class="form-fields-container grid grid-cols-12 p-3 gap-4 m-2">
+            <p-floatlabel class="mb-3 col-span-full md:col-span-6" variant="on">
+                <input formControlName="clientName" pInputText class="w-full" id="clientName" autocomplete="off" />
+                <label for="clientName"><i class="pi pi-user" style="color: grey"></i><span class="font-light">
+                        full name</span></label>
+            </p-floatlabel>
+            <p-floatlabel class="mb-3 col-span-full md:col-span-6" variant="on">
+                <input formControlName="clientPhone" pInputText type="phone" class="w-full" id="clientPhone"
+                    autocomplete="off" />
+                <label for="clientPhone"><i class="pi pi-phone" style="color: grey"></i><span class="font-light"> phone
+                        number</span></label>
+            </p-floatlabel>
+            <p-floatlabel class="mb-3 col-span-full" variant="on">
+                <input formControlName="clientEmail" pInputText type="email" class="w-full" id="clientEmail"
+                    autocomplete="off" />
+                <label for="clientEmail"><i class="pi pi-envelope" style="color: grey"></i><span class="font-light">
+                        e-mail adress</span></label>
+            </p-floatlabel>
+            <p-floatlabel class="mb-3 col-span-full" variant="on">
+                <p-select (onChange)="onProjectSelectionChange()" formControlName="clientProjectOfInterest"
+                    [autofocus]="false" inputId="selectedProject" [options]="projectsForSelect()" optionLabel="name"
+                    class="w-full" />
+                <label for="selectedProject"><span class="font-light">Select Project</span></label>
+            </p-floatlabel>
+            <p-floatlabel class="mb-3 col-span-full" variant="on">
+                <p-select formControlName="clientPreferedUnitType" [autofocus]="false" inputId="selectedUnitType"
+                    [options]="unitOptionValues()" optionLabel="name" class="w-full" />
+                <label for="selectedUnitType"><span class="font-light">Select Unit Type (Optional)</span></label>
+            </p-floatlabel>
+            @if(isBrowser()){
+            <p-floatlabel class="mb-3 col-span-full" variant="on">
+                <p-datepicker formControlName="clientSuitableDate" [showTime]="true" [hourFormat]="'12'"
+                    inputId="suitableDate" showIcon iconDisplay="input" />
+                <label for="suitableDate"><span class="font-light">Suitable Date (optional)</span></label>
+            </p-floatlabel>
+            }
+            <div class="col-span-12 flex justify-center items-center">
+                <button type="submit" class="btn-main" [disabled]="submitFlag">register interest @if(submitFlag){<i
+                        class="pi pi-spin pi-spinner" style="font-size: 10px"></i>}</button>
+            </div>
+        </form>
+    </div>
+</div>
