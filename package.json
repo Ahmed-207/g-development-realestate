@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "prebuild": "node tools/set-env.js",
+    "build:demo": "npm run prebuild && ng build --configuration demo",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:G-Development": "node dist/G-Development/server/server.mjs"
