@@ -6,7 +6,7 @@
     "baseUrl": "./",
     "paths": {
       "@env/*": [
-        "src/environments/*"
+        "./src/environments/*"
       ]
     },
     "strict": true,
