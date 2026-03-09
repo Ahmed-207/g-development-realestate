@@ -1,4 +1,4 @@
-import { environment } from './../../../../environments/environment';
+import { environment } from '@env/environment';
 import { Injectable, signal, WritableSignal, inject, DestroyRef } from '@angular/core';
 import { Firestore, collection, collectionData, query } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';

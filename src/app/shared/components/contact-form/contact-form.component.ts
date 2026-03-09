@@ -10,7 +10,7 @@ import { LeadData } from '../../../features/contact-us/interfaces/lead-data.inte
 import { LeadService } from '../../../features/contact-us/services/lead.service';
 import { PrimeIcons } from 'primeng/api';
 import { finalize } from 'rxjs';
-import { environment } from '../../../../environments/environment';
+import { environment } from '@env/environment';
 import { ProjectData } from '../../../core/interfaces/project-data/project-data.interface';
 
 

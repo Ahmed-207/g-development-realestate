@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { delay, from, Observable, of, tap } from 'rxjs';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { LeadData } from '../interfaces/lead-data.interface';
-import { environment } from '../../../../environments/environment';
+import { environment } from '@env/environment';
 
 
 @Injectable({
