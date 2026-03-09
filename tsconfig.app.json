@@ -9,8 +9,8 @@
     ],
     "baseUrl": "./",
     "paths": {
-      "@env/*": [
-        "./src/environments/*"
+      "src/*": [
+        "./src/*"
       ]
     }
   },
