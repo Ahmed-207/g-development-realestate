@@ -2,23 +2,13 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter, withInMemoryScrolling, withViewTransitions } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
-
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { environment } from 'src/environments/environment';
 
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAg2gYQQzHOHGO5TY9OV3y-Rj_feM6qIVs",
-  authDomain: "g-developments-leads.firebaseapp.com",
-  projectId: "g-developments-leads",
-  storageBucket: "g-developments-leads.firebasestorage.app",
-  messagingSenderId: "767749134811",
-  appId: "1:767749134811:web:9db22648be58640665effe",
-  measurementId: "G-YG3KWST5PF"
-};
 
 
 
@@ -37,8 +27,9 @@ export const appConfig: ApplicationConfig = {
       }
     }),
     provideHttpClient(withFetch()),
-    provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    provideFirestore(() => getFirestore())
-
+    ...(environment.firebase?.apiKey ? [
+      provideFirebaseApp(() => initializeApp(environment.firebase)),
+      provideFirestore(() => getFirestore())
+    ] : [])
   ]
 };
