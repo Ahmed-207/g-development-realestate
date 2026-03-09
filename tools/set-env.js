@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const envDir = path.join(__dirname, 'src/environments');
+const envDir = path.join(process.cwd(), 'src', 'environments');
 const targetPath = path.join(envDir, 'environment.ts');
 const demoPath = path.join(envDir, 'environment.demo.ts');
 
