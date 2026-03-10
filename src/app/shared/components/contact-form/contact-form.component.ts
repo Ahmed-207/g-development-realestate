@@ -8,10 +8,10 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { isPlatformBrowser } from '@angular/common';
 import { LeadData } from '../../../features/contact-us/interfaces/lead-data.interface';
 import { LeadService } from '../../../features/contact-us/services/lead.service';
-import { PrimeIcons } from 'primeng/api';
 import { finalize } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ProjectData } from '../../../core/interfaces/project-data/project-data.interface';
+
 
 
 interface ProjectsForSelection {
@@ -27,7 +27,7 @@ interface UnitsForSelection {
 @Component({
   selector: 'app-contact-form',
   imports: [FloatLabelModule, InputTextModule, SelectModule, FormsModule, DatePickerModule, ReactiveFormsModule],
-  providers: [PrimeIcons],
+
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.css',
 })
@@ -36,25 +36,25 @@ export class ContactFormComponent implements OnInit {
   private readonly projectService = inject(ProjectService);
   private readonly plat_id = inject(PLATFORM_ID);
   private readonly leadService = inject(LeadService);
-  availableProjects: Signal<string[]> = computed(() => { return this.projectService.mainProjects().map((item) => item.projectName) });
-  availableProjectsArr: Signal<ProjectData[]> = computed(() => { return this.projectService.mainProjects() });
+  availableProjectsArr: WritableSignal<ProjectData[]> = signal<ProjectData[]>([]);
+  availableProjects: Signal<string[]> = computed(() => { return this.availableProjectsArr().map((item) => item.projectName) });
   projectsForSelect: Signal<ProjectsForSelection[]> = computed(() => { return this.availableProjects().map((item) => { return { name: item, value: item } }) });
   unitOptionValues: WritableSignal<UnitsForSelection[]> = signal<UnitsForSelection[]>([]);
   datetime12h: Date[] | undefined;
   isBrowser: WritableSignal<boolean> = signal(false);
-  leadFormData: WritableSignal<FormGroup> = signal({} as FormGroup);
+  leadFormData!: FormGroup;
   modalFlagForHome = output<boolean>();
   toastFlag = output<boolean>();
   submitFlag: boolean = false;
-  projectSelectEle = viewChild.required(Select);
+  projectSelectEle = viewChild(Select);
 
   onProjectSelectionChange(): void {
-    if (this.leadFormData().get('clientProjectOfInterest')?.value.name) {
-      const selectedProject = this.leadFormData().get('clientProjectOfInterest')?.value.name
+    if (this.leadFormData.get('clientProjectOfInterest')?.value.name) {
+      const selectedProject = this.leadFormData.get('clientProjectOfInterest')?.value.name
       this.unitOptionValues.set(this.availableProjectsArr().find((project) => project.projectName === selectedProject)?.unitsType.map((item) => { return { name: item, value: item } })!)
     };
-    this.leadFormData().get('clientPreferedUnitType')?.setValue(null);
-    this.projectSelectEle().hide();
+    this.leadFormData.get('clientPreferedUnitType')?.setValue(null);
+    this.projectSelectEle()?.hide();
   }
 
   closeModalAfterSuccess(): void {
@@ -71,14 +71,14 @@ export class ContactFormComponent implements OnInit {
 
   createLeadForm(): void {
 
-    this.leadFormData.set(this.fb.group({
+    this.leadFormData = this.fb.group({
       clientName: [null, Validators.required],
       clientPhone: [null, [Validators.required, Validators.pattern(/^01[0-9]{9}$/)]],
       clientEmail: [null, [Validators.required, Validators.email]],
       clientProjectOfInterest: [null, [Validators.required]],
       clientPreferedUnitType: [null],
       clientSuitableDate: [null]
-    }));
+    })
 
 
 
@@ -87,22 +87,22 @@ export class ContactFormComponent implements OnInit {
 
 
   onSubmitForm(): void {
-    if (this.leadFormData().valid) {
+    if (this.leadFormData.valid) {
       this.submitFlag = true;
-      const formData: LeadData = this.leadFormData().value;
+      const formData: LeadData = this.leadFormData.value;
       this.leadService.addNewLead(formData).pipe(finalize(() => { this.submitFlag = false })).subscribe({
         next: (response) => {
           if (environment.demo) {
             console.log('DEMO: Form data recieved , no data stored ')
             this.closeModalAfterSuccess();
             this.showToastSuccess();
-            this.leadFormData().reset();
+            this.leadFormData.reset();
 
           } else {
             console.log('Success! Document ID:', response.id);
             this.closeModalAfterSuccess();
             this.showToastSuccess();
-            this.leadFormData().reset();
+            this.leadFormData.reset();
           }
         },
         error: (err) => {
@@ -113,16 +113,32 @@ export class ContactFormComponent implements OnInit {
     }
   }
 
+  getProjectsForContact(): void {
+    this.projectService.getProjects().subscribe({
+      next: (res) => {
+        this.availableProjectsArr.set(res);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
+  }
+
   ngOnInit(): void {
 
     this.createLeadForm();
 
     if (isPlatformBrowser(this.plat_id)) {
       this.isBrowser.set(true);
+      if (environment.demo) {
+        const projectsArr = this.projectService.mainProjects();
+        this.availableProjectsArr.set(projectsArr || []);
+      } else {
+        this.getProjectsForContact();
+      }
     }
 
-
-
   }
+
 
 }

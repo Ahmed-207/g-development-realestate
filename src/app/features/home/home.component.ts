@@ -1,11 +1,12 @@
 import { ToastModule } from 'primeng/toast';
-import { Component, computed, HostListener, inject, Signal } from '@angular/core';
+import { Component, HostListener, inject, signal, WritableSignal } from '@angular/core';
 import { AnimateOnScroll } from '../../shared/directives/animate-on-scroll';
 import { ProjectOverviewComponent } from "./components/project-overview/project-overview.component";
 import { ProjectData } from '../../core/interfaces/project-data/project-data.interface';
 import { ProjectService } from '../../core/services/projects/project.service';
 import { ContactFormComponent } from "../../shared/components/contact-form/contact-form.component";
 import { MessageService, PrimeIcons } from 'primeng/api';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -22,7 +23,7 @@ export class HomeComponent {
   private readonly messageService = inject(MessageService);
   isContactModalOpen: boolean = false;
   toastFlagForHome!: boolean;
-  mainProjectsForHome: Signal<ProjectData[]> = computed(() => this.projectService.mainProjects());
+  mainProjectsForHome: WritableSignal<ProjectData[]> = signal<ProjectData[]>([]);
 
 
   openModal(): void {
@@ -55,6 +56,12 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.openModal();
+    if(environment.demo){
+      this.mainProjectsForHome.set(this.projectService.mainProjects());
+    }else{
+      this.getProjectsForHome();
+    }
+
   }
 
   @HostListener('window:keydown.escape', ['$event'])
@@ -62,6 +69,17 @@ export class HomeComponent {
     if (event.key === 'Escape') {
       this.closeModal();
     }
+  }
+
+  getProjectsForHome():void{
+    this.projectService.getProjects().subscribe({
+      next:(res)=>{
+        this.mainProjectsForHome.set(res);
+      },
+      error: (err)=>{
+        console.error(err);
+      }
+    })
   }
 
 

@@ -39,6 +39,7 @@
     "animate.css": "^4.1.1",
     "express": "^5.1.0",
     "firebase": "^11.10.0",
+    "ngx-spinner": "^21.0.0",
     "primeicons": "^7.0.0",
     "primeng": "^21.1.1",
     "rxjs": "~7.8.0",

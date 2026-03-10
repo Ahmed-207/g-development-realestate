@@ -6,12 +6,11 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { AnimateOnScroll } from '../../shared/directives/animate-on-scroll';
 import { ContactAccessCardComponent } from "./components/contact-access-card/contact-access-card.component";
-import { PrimeIcons } from 'primeng/api';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-project-details',
   imports: [ProjectHeadingCarouselComponent, AnimateOnScroll, ContactAccessCardComponent],
-  providers:[PrimeIcons],
   templateUrl: './project-details.component.html',
   styleUrl: './project-details.component.css',
 })
@@ -21,7 +20,7 @@ export class ProjectDetailsComponent implements OnInit {
   private readonly projectService = inject(ProjectService);
   private readonly titleService = inject(Title);
   targetRoutedProject: WritableSignal<string> = signal<string>('');
-  projectDataForDetails: Signal<ProjectData> = computed(() => this.projectService.mainProjects().find((item) => item.projectSlug === this.targetRoutedProject())!);
+  projectDataForDetails: WritableSignal<ProjectData> = signal<ProjectData>({} as ProjectData);
   projectDataForCarousel: Signal<ProjectSlide[]> = computed(() => this.projectDataForDetails().projectSlides!);
 
   constructor() {
@@ -36,9 +35,27 @@ export class ProjectDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.activeRoute.paramMap.subscribe((params: ParamMap) => {
       this.targetRoutedProject.set(params.get('slug')!);
+      if (environment.demo) {
+        const targetProjectDetails = this.projectService.mainProjects().find((item) => item.projectSlug === this.targetRoutedProject())
+        if (targetProjectDetails) {
+          this.projectDataForDetails.set(targetProjectDetails);
+        }
+      } else {
+        this.getProjectDetails();
+      }
     });
+  }
 
-
+  getProjectDetails(): void {
+    this.projectService.getProjects().subscribe({
+      next: (res) => {
+        this.projectDataForDetails.set(res.find((item) => item.projectSlug === this.targetRoutedProject())!)
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
   }
 
 }
+

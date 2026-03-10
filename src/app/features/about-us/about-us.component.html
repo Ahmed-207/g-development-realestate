@@ -27,7 +27,7 @@
                 @for(project of projectsForAbout(); track $index){
                 <div [appAnimateOnScroll]=" $even ? 'animate__fadeInLeft' : 'animate__fadeInRight'"
                     [animateDuration]="4" class="col-span-12 md:col-span-6 min-h-[50vh]"
-                    [animateDelay]="$index*0.5+'s'">
+                    [animateDelay]="$index*0.1+'s'">
                     <app-project-card [projectImage]="project.projectMainImg" [projectName]="project.projectName"
                         [projectSlug]="project.projectSlug"></app-project-card>
                 </div>

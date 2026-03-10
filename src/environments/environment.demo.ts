@@ -11,5 +11,7 @@ export const environment = {
         messagingSenderId: "",
         appId: "",
         measurementId: ""
-    } as FirebaseOptions
+    } as FirebaseOptions,
+    apiKeyForSheets:'',
+    googleSheetId:''
 };

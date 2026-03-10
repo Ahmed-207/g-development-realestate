@@ -7,10 +7,13 @@ import {
   PLATFORM_ID,
   Signal,
   computed,
+  WritableSignal,
+  signal,
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProjectData } from '../../../core/interfaces/project-data/project-data.interface';
+import { environment } from 'src/environments/environment';
 
 export interface DropdownItem {
   label: string;
@@ -28,7 +31,7 @@ export class NavbarComponent {
 
   private readonly plat_id = inject(PLATFORM_ID);
   private readonly projectService = inject(ProjectService);
-  projectDataForRoute: Signal<ProjectData[]> = computed(() => this.projectService.mainProjects());
+  projectDataForRoute: WritableSignal<ProjectData[]> = signal<ProjectData[]>([]);
 
   @ViewChild('dropdownHost') dropdownHost!: ElementRef<HTMLElement>;
 
@@ -56,6 +59,11 @@ export class NavbarComponent {
  
     if (isPlatformBrowser(this.plat_id)) {
       this.lastScrollY = window.scrollY;
+    }
+    if(environment.demo){
+      this.projectDataForRoute.set(this.projectService.mainProjects());
+    }else{
+      this.getProjectsForNav();
     }
   }
 
@@ -122,6 +130,17 @@ export class NavbarComponent {
 
   closeMobileMenu(): void {
     this.mobileMenuOpen = false;
+  }
+
+  getProjectsForNav():void{
+    this.projectService.getProjects().subscribe({
+      next: (res)=>{
+        this.projectDataForRoute.set(res);
+      },
+      error: (err)=>{
+        console.error(err);
+      }
+    })
   }
 
 }
