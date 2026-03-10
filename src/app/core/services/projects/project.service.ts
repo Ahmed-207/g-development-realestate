@@ -20,8 +20,8 @@ export class ProjectService {
     if (environment.demo) {
       this.mainProjects.set(demoProjects);
     } else {
-      this.apiKey.set(environment.apiKeyForSheets);
-      this.sheetId.set(environment.googleSheetId);
+      this.apiKey.set(environment.apiKeyForSheets || '');
+      this.sheetId.set(environment.googleSheetId || '');
     }
   }
 
