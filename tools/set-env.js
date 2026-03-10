@@ -12,6 +12,8 @@ if (!fs.existsSync(envDir)) {
 // Get the config from Vercel. 
 // It MUST be a valid JSON string like: {"apiKey": "...", "projectId": "..."}
 const firebaseConfig = process.env.FIREBASE_CONFIG_DEMO || '{}';
+const sheetsApiKey = process.env.GOOGLE_SHEETS_API_KEY || '';
+const googleSheetId = process.env.GOOGLE_SHEET_ID || '';
 
 const envConfigFile = `
 import { FirebaseOptions } from "@angular/fire/app";
@@ -19,7 +21,9 @@ import { FirebaseOptions } from "@angular/fire/app";
 export const environment = {
     production: false,
     demo: true,
-    firebase: ${firebaseConfig} as FirebaseOptions
+    firebase: ${firebaseConfig} as FirebaseOptions,
+    apiKeyForSheets: '${sheetsApiKey}', // Add this
+    googleSheetId: '${googleSheetId}'    // Add this
 };
 `;
 
